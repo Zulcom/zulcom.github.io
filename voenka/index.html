@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Сраная военка</title>
+</head>
+<body>
+<h1>Военок осталось: <span id="toend-counter"></span></h1>
+<h2>Военок прошло: <span id="fromStart-counter"></span></h2>
+<style>
+ body{max-width:1280px;margin:0 auto}
+ main{
+     display: flex;
+    justify-content: flex-start;
+	flex-wrap:wrap;
+ }
+.filled {
+	width: 0;
+	height: 0;
+	border: 20px solid #76EA9C;
+	position: relative;
+	transform:rotate(45deg);
+	margin:22px;
+}
+.notfilled {
+	width: 0;
+    height: 0;
+    border: 2px solid black;
+    padding: 20px;
+    position: relative;
+    transform: rotate(45deg);
+    margin: 20px;
+}
+.sbor {
+	width: 0;
+    height: 0;
+    border: 2px solid #B78B4A;
+    padding: 20px;
+    position: relative;
+    transform: rotate(45deg);
+    margin: 20px;
+}
+.sbor-text{
+	color:#B78B4A;
+}
+#fromStart-counter{
+color:#76EA9C;
+}
+</style>
+<main>
+<div class="filled"></div>
+</main>
+<script>
+var fromStart=1,toEnd=1,sbor=1;
+for (let i = new Date('2017-02-21').getTime(); i < new Date().getTime(); i+=(1000*60*60*24*7)) {
+	let iDate = new Date(i);
+	let dateNum = iDate.getMonth();
+	dateNum++;
+	if(dateNum === 1 || (dateNum >= 6 && dateNum <=8)) continue;
+   let div = document.getElementsByClassName('filled');
+    clone = div[div.length-1].cloneNode(true); // true means clone all childNodes and all event handlers
+	//clone.innerHTML = `${iDate.getDate()}.${dateNum}.${iDate.getYear()-100}`;
+	div[div.length-1].parentElement.appendChild(clone);
+	fromStart++;
+}
+let div = document.getElementsByClassName('filled');
+let m = document.createElement('div')
+m.classList.add('notfilled')
+//m.innerHTML = '26.2.18';
+div[div.length-1].parentElement.appendChild(m);
+for (let i = new Date().getTime()+(1000*60*60*24*7); i < new Date('2019-05-28').getTime(); i+=(1000*60*60*24*7)) {
+  let iDate = new Date(i);
+	let dateNum = iDate.getMonth();
+	dateNum++;
+	if(dateNum === 1 || (dateNum >= 6 && dateNum <=8)) continue;
+   let div = document.getElementsByClassName('notfilled');
+    clone = div[div.length-1].cloneNode(true); // true means clone all childNodes and all event handlers
+	//clone.innerHTML = `${iDate.getDate()}.${dateNum}.${iDate.getYear()-100}`;
+	div[div.length-1].parentElement.appendChild(clone);
+	toEnd++;
+}
+div = document.getElementsByClassName('notfilled');
+m = document.createElement('div')
+m.classList.add('sbor')
+//m.innerHTML = '1.6.19';
+div[div.length-1].parentElement.appendChild(m);
+for (let i = new Date('2019-07-01').getTime()+(1000*60*60*24); i < new Date('2019-08-01').getTime(); i+=(1000*60*60*24)) {
+   let iDate = new Date(i);
+   let dateNum = iDate.getMonth();
+   let div = document.getElementsByClassName('sbor');
+    clone = div[div.length-1].cloneNode(true); // true means clone all childNodes and all event handlers
+	//clone.innerHTML = `${iDate.getDate()}.${dateNum}.${iDate.getYear()-100}`;
+	div[div.length-1].parentElement.appendChild(clone);
+	sbor++;
+}
+
+document.getElementById('toend-counter').innerHTML = toEnd+ `<span class="sbor-text">+${sbor}</span>`+ ' = '+(toEnd+sbor);
+document.getElementById('fromStart-counter').innerHTML = fromStart;
+let currDate = new Date();
+</script>
+</body>
+</html>
